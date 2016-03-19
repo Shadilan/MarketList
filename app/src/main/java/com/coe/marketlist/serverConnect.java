@@ -32,7 +32,7 @@ public class serverConnect {
         return instance;
     }
 
-    private String ServerAddres="http://tolps.pe.hu/MainService.php";
+    private String ServerAddres="http://tolps.pe.hu/MainServiceJS.php";
     private Context context;
     private RequestQueue reqq;
     private String Token;
@@ -106,10 +106,17 @@ public class serverConnect {
     public boolean createList(String Name){
         if (!checkConnection()) return false;
         Log.d("ServeConnect","Connection start");
-        String url=ServerAddres+"?OPER=CREATE&NAME="+Name;
+        JSONObject jsonObject = null;
+        try {
+            jsonObject=new JSONObject().put("OPER","CREATE")
+                    .put("NAME", Name);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String url=ServerAddres;
         Log.d("ServeConnect",url);
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
+                (Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>(){
 
                     @Override
                     public void onResponse(JSONObject response) {
@@ -127,13 +134,20 @@ public class serverConnect {
         return true;
     }
     //AddItem
-    public boolean addItem(String GUID,String Name){
+    public boolean addItem(String GUID,String Name,String Group){
         if (!checkConnection()) return false;
         Log.d("ServeConnect","Connection start");
-        String url=ServerAddres+"?OPER=ADD&GUID="+GUID+"&NAME="+Name;
+        JSONObject jsonObject = null;
+        try {
+            jsonObject=new JSONObject().put("OPER","ADD")
+                    .put("NAME", Name).put("GUID",GUID).put("GROUP",Group);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String url=ServerAddres;
         Log.d("ServeConnect",url);
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
+                (Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>(){
 
                     @Override
                     public void onResponse(JSONObject response) {
@@ -154,10 +168,18 @@ public class serverConnect {
     public boolean DeleteItem(String GUID,String ItemGUID){
         if (!checkConnection()) return false;
         Log.d("ServeConnect","Connection start");
-        String url=ServerAddres+"?OPER=DELETE&GUID="+GUID+"&ITEMGUID="+ItemGUID;
+        JSONObject jsonObject = null;
+        try {
+            jsonObject=new JSONObject().put("OPER","DELETE")
+                    .put("ITEMGUID", ItemGUID).put("GUID",GUID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String url=ServerAddres;
+
         Log.d("ServeConnect",url);
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
+                (Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>(){
 
                     @Override
                     public void onResponse(JSONObject response) {
@@ -175,13 +197,21 @@ public class serverConnect {
         return true;
     }
     //ChangeItem
-    public boolean ChangeItem(String GUID, String ItemGUID,String Name){
+    public boolean changeItem(String GUID, String ItemGUID,String Name,String Group){
         if (!checkConnection()) return false;
         Log.d("ServeConnect","Connection start");
-        String url=ServerAddres+"?OPER=CHANGE&GUID="+GUID+"&ITEMGUID="+ItemGUID+"NAME="+Name;
+        JSONObject jsonObject = null;
+        try {
+            jsonObject=new JSONObject().put("OPER","CHANGE").put("GUID",GUID)
+                    .put("ITEMGUID", ItemGUID).put("ITEMNAME",Name).put("GROUP",Group);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String url=ServerAddres;
         Log.d("ServeConnect",url);
+        Log.d("ServeConnect",jsonObject.toString());
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
+                (Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>(){
 
                     @Override
                     public void onResponse(JSONObject response) {
@@ -202,10 +232,17 @@ public class serverConnect {
     public boolean StateItem(String GUID, String ItemGUID,String State){
         if (!checkConnection()) return false;
         Log.d("ServeConnect","Connection start");
-        String url=ServerAddres+"?OPER=STATUS&GUID="+GUID+"&ITEMGUID="+ItemGUID+"&STATE="+State;
+        JSONObject jsonObject = null;
+        try {
+            jsonObject=new JSONObject().put("OPER","STATUS").put("GUID",GUID)
+                    .put("ITEMGUID", ItemGUID).put("STATE",State);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String url=ServerAddres;
         Log.d("ServeConnect",url);
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
+                (Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>(){
 
                     @Override
                     public void onResponse(JSONObject response) {
@@ -226,10 +263,17 @@ public class serverConnect {
     public boolean GetData(String GUID){
         if (!checkConnection()) return false;
         Log.d("ServeConnect","Connection start");
-        String url=ServerAddres+"?OPER=GET&GUID="+GUID;
+        JSONObject jsonObject = null;
+        try {
+            jsonObject=new JSONObject().put("OPER","GET").put("GUID",GUID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String url=ServerAddres;
         Log.d("ServeConnect",url);
+        Log.d("ServeConnect",jsonObject.toString());
         final JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
+                (Request.Method.POST, url, jsonObject, new Response.Listener<JSONObject>(){
 
                     @Override
                     public void onResponse(JSONObject response) {

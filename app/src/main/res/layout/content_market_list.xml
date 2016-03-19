@@ -14,17 +14,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/relativeLayout">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/refresh"
-            android:id="@+id/refresh"
-            android:textColor="@android:color/black"
-            android:minWidth="1dp"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/share"
-            android:layout_toStartOf="@+id/share" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,30 +22,18 @@
             android:inputType="text"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/open"
-            android:id="@+id/open"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
             android:layout_toLeftOf="@+id/refresh"
-            android:minWidth="1dp" />
+            android:layout_toStartOf="@+id/refresh" />
 
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/share"
-            android:text="@string/share"
-            android:onClick="SHARE"
+            android:id="@+id/refresh"
+            android:src="@mipmap/refresh"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:minWidth="1dp"/>
-
+            android:layout_alignParentEnd="true" />
 
 
     </RelativeLayout>
@@ -65,10 +42,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/scrollView2"
-        android:layout_alignParentBottom="true"
         android:layout_below="@+id/relativeLayout"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" >
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true">
 
         <LinearLayout
             android:orientation="vertical"
@@ -94,5 +71,202 @@
             android:layout_height="wrap_content"
             android:id="@+id/listOfList"/>
     </ScrollView>
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New ToggleButton"
+        android:id="@+id/actionOn"
+        android:textOff=">"
+        android:textOn="&lt;"
+        android:minWidth="1dp"
+        android:singleLine="true"
+        android:onClick="showPanel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/instrumentPanel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/actionOn"
+        android:layout_toStartOf="@+id/actionOn"
+        android:layout_alignTop="@+id/actionOn"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/add"
+                android:src="@mipmap/add"
+                android:onClick="createAction"
+                android:layout_alignTop="@+id/instrumentPanel"
+                android:layout_centerHorizontal="true" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit"
+                android:src="@mipmap/edit"
+                android:onClick="editAction"
+                android:layout_alignTop="@+id/instrumentPanel"
+                android:layout_centerHorizontal="true" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/delete"
+                android:src="@mipmap/delete"
+                android:onClick="deleteAction"
+                android:layout_alignTop="@+id/instrumentPanel"
+                android:layout_centerHorizontal="true" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/open"
+                android:src="@mipmap/open"
+                android:layout_alignTop="@+id/instrumentPanel"
+                android:layout_centerHorizontal="true" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/share"
+                android:src="@mipmap/share"
+                android:onClick="SHARE"
+                android:layout_alignTop="@+id/instrumentPanel"
+                android:layout_toRightOf="@+id/open"
+                android:layout_toEndOf="@+id/open" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/list"
+                android:src="@mipmap/list"
+                android:onClick="listAction"
+                android:layout_alignBottom="@+id/scrollView2"
+                android:layout_toLeftOf="@+id/open"
+                android:layout_toStartOf="@+id/open" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_above="@+id/actionOn"
+        android:background="@android:color/white"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:columnCount="2"
+        android:rowCount="3"
+        android:visibility="gone"
+        android:background="@android:color/white"
+        android:id="@+id/editItem">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Группа"
+            android:id="@+id/textView"
+            android:maxWidth="150dp"
+            android:minWidth="150dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/itemGroup"
+            android:maxWidth="150dp"
+            android:minWidth="150dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Товар"
+            android:id="@+id/textView2" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/itemName"
+            android:minWidth="150dp"
+            android:maxWidth="150dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:layout_gravity="center_horizontal"
+            android:onClick="saveItem"
+            android:src="@mipmap/edit" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton2"
+            android:onClick="cancelItem"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/delete" />
+    </GridLayout>
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:visibility="gone"
+        android:background="@android:color/white"
+        android:id="@+id/createList">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Список"
+            android:maxWidth="150dp"
+            android:minWidth="150dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listName"
+            android:maxWidth="150dp"
+            android:minWidth="150dp" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton3"
+            android:onClick="saveItem"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/edit" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton4"
+            android:layout_gravity="center_horizontal"
+            android:onClick="cancelItem"
+            android:src="@mipmap/delete" />
+    </GridLayout>
 
 </RelativeLayout>
